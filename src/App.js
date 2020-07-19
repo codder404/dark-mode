@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+  const [darkTheme, setDarkTheme] = useState(getDefaultTheme);
+
+  useEffect(() => {
+    localStorage.setItem('dark', JSON.stringify(darkTheme));
+  }, [darkTheme]);
+
+  function getDefaultTheme() {
+    const selectedTheme = JSON.parse(localStorage.getItem('dark'));
+    return selectedTheme || false;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+    (
+      <div className={darkTheme ? 'dark-theme' : 'light-theme'}>
+        <nav>
+          <div className="button-container">
+            <button onClick={() => setDarkTheme(prevTheme => !prevTheme)}>
+              Toggle Theme
+            </button>
+          </div>
+        </nav>
+        <div className="content">
+          <h1>{darkTheme ? 'Dark Mode' : 'Light Mode'}</h1>
+          <p>
+            Do take note of the <code>color</code> property in the nav bar.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        </div>
+      </div>
+    )
   );
 }
 
