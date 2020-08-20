@@ -25,9 +25,7 @@ function App() {
         </nav>
         <div className="content">
           <h1>{darkTheme ? 'Dark Mode' : 'Light Mode'}</h1>
-          <p>
-            Do take note of the <code>color</code> property in the nav bar.
-        </p>
+          <h1>Tabs Demo</h1>
         </div>
       </div>
     )
